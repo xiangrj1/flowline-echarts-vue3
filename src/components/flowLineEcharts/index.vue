@@ -62,9 +62,7 @@ defineExpose({
     <div class="echarts-flow-line-main">
         <div class="echarts-content" ref="echartsRef" style="opacity: 1"></div>
         <template v-for="(config, index) in flowLineConfigList" :key="index">
-            <div class="flow-line-svg">
-                <flow-line-path v-bind="config" />
-            </div>
+            <flow-line-path v-bind="config" />
         </template>
     </div>
 </template>
@@ -79,13 +77,6 @@ defineExpose({
         z-index: 1;
         width: 100%;
         height: 100%;
-    }
-    .flow-line-svg {
-        position: absolute;
-        z-index: 2;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
     }
 }
 </style>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
 import FlowLineEcharts from "./components/flowLineEcharts/index.vue";
+// import { FlowLineEcharts } from "../dist/flow-line-echarts-vue3.es"
 
 const optionsProps = {
     xAxis: {
@@ -20,6 +21,7 @@ const optionsProps = {
                 radiusStep: [2, 2],
                 lineLength: 100,
                 dur: 4,
+                delay: 0,
             }
         },
         {

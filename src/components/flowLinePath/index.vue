@@ -53,7 +53,7 @@ const props = defineProps({
 const clipPathId = "clip" + renderedUniqueId();
 const pathId = "path" + renderedUniqueId();
 
-const list = computed(() => {
+const circleList = computed(() => {
     let { colorStep, radiusStep, lineLength } = props;
     if (typeof colorStep === "string") {
         colorStep = new Array(lineLength).fill(colorStep);
@@ -72,6 +72,7 @@ const list = computed(() => {
             index: count,
             color: colorStep[count],
             radius: radiusStep[count],
+            animateId: pathId + "-" + count,
         })
         count++;
     }
@@ -96,7 +97,6 @@ function divideArray(x: number, y: number, length: number): number[] {
 }
 
 const reloadState = ref(0);
-
 onMounted(() => {
     delayAnimate();
 })
@@ -109,7 +109,7 @@ let timer: null | number | NodeJS.Timeout = null;
 const delayAnimate = () => {
     nextTick(() => {
         const animateMotion = svgRef.value.querySelectorAll("animateMotion");
-        animateMotion[animateMotion.length - 1].addEventListener("endEvent", () => {
+        animateMotion[animateMotion.length - 1].addEventListener("endEvent", (event) => {
             if (typeof timer === "number") {
                 clearInterval(timer);
                 timer = null;
@@ -120,22 +120,45 @@ const delayAnimate = () => {
         })
     })
 }
+
+const endFun = (event) => {
+    consle.log(event);
+}
 </script>
 
 <template>
-    <svg v-if="path" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" ref="svgRef" :key="reloadState">
-        <clipPath :id="clipPathId"><path :d="clipPath" fill="#000"></path></clipPath>
-        <g :clip-path="`url(#${clipPathId}))`">
-            <path :d="path" :id="pathId" fill="none"></path>
-            <template v-for="{ index, color, radius } in list" :key="index">
-                <circle class="comet-core" :fill="color" :r="radius">
-                    <animateMotion :dur="dur" :begin="index * animateStep">
-                        <mpath :href="`#${pathId}`" />
-                    </animateMotion>
-                </circle>
-            </template>
-        </g>
-    </svg>
+    <div class="flow-line-svg-main">
+        <svg v-if="path" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" ref="svgRef" :key="reloadState">
+            <clipPath :id="clipPathId"><path :d="clipPath" fill="#000"></path></clipPath>
+            <g :clip-path="`url(#${clipPathId}))`">
+                <path :d="path" :id="pathId" fill="none"></path>
+                <template v-for="{ index, color, radius, animateId } in circleList" :key="index">
+                    <circle class="comet-core" :fill="color" :r="radius">
+                        <animateMotion :dur="dur" :id="animateId" :begin="index * animateStep" @onend="endFun">
+                            <mpath :href="`#${pathId}`" />
+                        </animateMotion>
+                    </circle>
+                </template>
+            </g>
+        </svg>
+    </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.flow-line-svg-main {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: calc(100% - 10px);
+    top: 10px;
+    pointer-events: none;
+    overflow: hidden;
+    svg {
+        width: 100%;
+        height: calc(100% + 10px);
+        position: absolute;
+        top: -10px;
+        left: 0;
+    }
+}
+</style>
