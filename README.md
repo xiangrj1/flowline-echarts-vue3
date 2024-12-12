@@ -1,5 +1,8 @@
 # flowline-echarts-vue3
 
+## 实现效果
+![图片出错了](./public/demo.gif)
+
 ## 使用包管理器
 
 **我们建议您使用包管理器（如 NPM、Yarn 或 pnpm）安装**
