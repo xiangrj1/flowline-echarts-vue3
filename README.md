@@ -1,7 +1,7 @@
 # flowline-echarts-vue3
 
 ## 实现效果
-![图片出错了](./public/demo.gif)
+![图片出错了](https://www.helloimg.com/i/2024/12/26/676cd388d341d.gif)
 
 ## 使用包管理器
 
@@ -17,6 +17,20 @@ $ yarn add flowline-echarts-vue3
 
 # pnpm
 $ pnpm install flowline-echarts-vue3
+```
+
+## 需要额外安装Echarts依赖
+
+```
+# 选择一个你喜欢的包管理器
+# NPM
+$ npm install echarts --save
+
+# Yarn
+$ yarn add echarts
+
+# pnpm
+$ pnpm install echarts
 ```
 
 ## 组件使用
