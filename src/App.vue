@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import {onMounted, ref} from "vue";
-import FlowLineEcharts from "./components/flowLineEcharts/index.vue";
+// import FlowLineEcharts from "./components/flowLineEcharts/index.vue";
 // import { FlowLineEcharts } from "../dist/flow-line-echarts-vue3.es"
+import { FlowLineEcharts } from "flowline-echarts-vue3";
+import "flowline-echarts-vue3/style.css";
 
 const optionsProps = {
     xAxis: {

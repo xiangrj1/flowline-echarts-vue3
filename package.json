@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "flowline-echarts-vue3": "^0.0.3",
     "vue": "^3.4.37"
   },
   "devDependencies": {
